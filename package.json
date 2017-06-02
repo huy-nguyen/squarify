@@ -1,0 +1,51 @@
+{
+  "name": "squarify",
+  "version": "0.1.0",
+  "description": "TypeScript/JavaScript implementation of Bruls et al.'s squarified treemap algorithm",
+  "keywords": [
+    "treemap",
+    "squarify",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Huy Nguyen <huy@huy-nguyen.com> (https://www.huy-nguyen.com/)",
+  "files": [
+    "dist",
+    "lib",
+    "es"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huy-nguyen/squarify.git"
+  },
+  "scripts": {
+    "start": "nps",
+    "build": "nps build",
+    "test": "nps test",
+    "commitmsg": "nps commitmsg"
+  },
+  "types": "./lib/index.d.ts",
+  "devDependencies": {
+    "@types/lodash": "4.14.65",
+    "babel-core": "6.24.1",
+    "babel-preset-env": "1.5.1",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog-customizable": "1.0.1",
+    "husky": "0.13.4",
+    "jest": "20.0.4",
+    "ts-jest": "20.0.5",
+    "tslib": "1.7.1",
+    "typescript": "2.3.4",
+    "uglify-js": "3.0.15",
+    "validate-commit-msg": "2.12.1"
+  },
+  "dependencies": {
+    "lodash": "4.17.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-customizable"
+    }
+  }
+}
