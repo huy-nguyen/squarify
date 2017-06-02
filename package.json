@@ -15,6 +15,7 @@
     "es"
   ],
   "main": "lib/index.js",
+  "esnext": "es/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huy-nguyen/squarify.git"
