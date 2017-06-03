@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "description": "TypeScript/JavaScript implementation of Bruls et al.'s squarified treemap algorithm",
   "keywords": [
-    "treemap",
     "squarify",
+    "squarified",
+    "treemap",
+    "tree",
+    "map",
     "typescript"
   ],
   "license": "MIT",
