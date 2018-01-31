@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 export type IDatum<Custom> = {
   value: number
   children?: IDatum<Custom>[]
@@ -14,7 +12,11 @@ export default function<Custom>(
   data: Input<Custom>[],
   container: {x0: number, y0: number, x1: number, y1: number}) {
 
-  const {x0, y0, x1, y1} = container;
+  const x0 = container.x0;
+  const y0 = container.y0;
+  const x1 = container.x1;
+  const y1 = container.y1;
+
   const input = {
     x0, y0, x1, y1,
     children: data,
@@ -39,26 +41,36 @@ export type ILayoutRect<T> = IRect & INormalizedDatum<T>;
 // Calculate the max aspect ratio if a list of rectangles whose areas are contained in `row`
 // are laid out against a line of length `length`:
 export const calculateMaxAspectRatio = <Custom>(row: INormalizedDatum<Custom>[], length: number): number => {
-  const allValues = row.map(({normalizedValue}) => normalizedValue);
-  const minArea = _.min(allValues);
-  const maxArea = _.max(allValues);
-  if (minArea === undefined || maxArea === undefined) {
+  const rowLength = row.length;
+  if (rowLength === 0) {
     throw new Error('Inpupt ' + row + ' is an empty array');
+  } else {
+    let minArea = Infinity;
+    let maxArea = - Infinity;
+    let sumArea = 0;
+    for (let i = 0; i < rowLength; i += 1) {
+      const area = row[i].normalizedValue;
+      if (area < minArea) {
+        minArea = area;
+      }
+      if (area > maxArea) {
+        maxArea = area;
+      }
+      sumArea += area;
+    }
+    const result = Math.max(
+      (length ** 2) * maxArea / (sumArea ** 2),
+      (sumArea ** 2) / ((length ** 2) * minArea)
+    );
+    return result;
   }
-  const sumArea = _.sum(allValues);
-
-  const result = _.max([
-    (length ** 2) * maxArea / (sumArea ** 2),
-    (sumArea ** 2) / ((length ** 2) * minArea)
-  ]) as number;
-  return result;
 }
 
 export const doesAddingToRowImproveAspectRatio = <Custom>(currentRow: INormalizedDatum<Custom>[], nextDatum: INormalizedDatum<Custom>, length: number) => {
   if (currentRow.length === 0) {
     return true;
   } else {
-    const newRow = [...currentRow, nextDatum];
+    const newRow = currentRow.concat(nextDatum);
     const currentMaxAspectRatio = calculateMaxAspectRatio(currentRow, length);
     const newMaxAspectRatio = calculateMaxAspectRatio(newRow, length);
     return (currentMaxAspectRatio >= newMaxAspectRatio);
@@ -67,16 +79,24 @@ export const doesAddingToRowImproveAspectRatio = <Custom>(currentRow: INormalize
 
 // Ensure that the sum of elements in `data` is equal to `area` (as per original algorithm):
 export const normalizeData = <Custom>(data: IDatum<Custom>[], area: number): INormalizedDatum<Custom>[] => {
-  const allValues = data.map(({value}) => value);
-  const dataSum = _.sum(allValues);
+  const dataLength = data.length;
+  let dataSum = 0;
+  for (let i = 0; i < dataLength; i += 1) {
+    dataSum += data[i].value;
+  }
+
   const multiplier = area / dataSum;
   // TODO: use spread/rest type instead of `Object.assign` when bug with rest/spread has been fixed.
-  return data.map(datum => {
-    const result: INormalizedDatum<Custom> = Object.assign({}, datum, {
+  const result: INormalizedDatum<Custom>[] = [];
+  let elementResult: INormalizedDatum<Custom>, datum: IDatum<Custom>;
+  for (let j = 0; j < dataLength; j += 1) {
+    datum = data[j];
+    elementResult = Object.assign({}, datum, {
       normalizedValue: datum.value * multiplier,
     })
-    return result;
-  })
+    result.push(elementResult);
+  }
+  return result;
 }
 
 interface IContainer {
@@ -86,42 +106,64 @@ interface IContainer {
   width: number
 }
 
-const containerToRect = ({xOffset, yOffset, width, height}: IContainer): IRect => ({
-  x0: xOffset,
-  y0: yOffset,
-  x1: xOffset + width,
-  y1: yOffset + height,
-})
+const containerToRect = (container: IContainer): IRect => {
+  const xOffset = container.xOffset;
+  const yOffset = container.yOffset;
+  const width = container.width;
+  const height = container.height;
+  return {
+    x0: xOffset,
+    y0: yOffset,
+    x1: xOffset + width,
+    y1: yOffset + height,
+  }
+}
 
-const rectToContainer = ({x0, y0, x1, y1}: IRect): IContainer => ({
-  xOffset: x0,
-  yOffset: y0,
-  width: x1 - x0,
-  height: y1 - y0
-})
+const rectToContainer = (rect: IRect): IContainer => {
+  const x0 = rect.x0;
+  const y0 = rect.y0;
+  const x1 = rect.x1;
+  const y1 = rect.y1;
+  return {
+    xOffset: x0,
+    yOffset: y0,
+    width: x1 - x0,
+    height: y1 - y0
+  }
+}
 
 const getShortestEdge = (input: IRect) => {
-  const {width, height} = rectToContainer(input)
-  const result = _.min([width, height]) as number;
+  const container = rectToContainer(input);
+  const width = container.width;
+  const height = container.height;
+  const result = Math.min(width, height);
   return result;
 }
 
 // Lay the rectangles inside a `container` so that the rectangles stack on top of each other in the direction
 // parallel to the width:
 export const getCoordinates = <Custom>(row: INormalizedDatum<Custom>[], rect: IRect): ILayoutRect<Custom>[] => {
+  const container = rectToContainer(rect);
+  const width = container.width;
+  const height = container.height;
+  const xOffset = container.xOffset;
+  const yOffset = container.yOffset;
 
-  const {width, height, xOffset, yOffset} = rectToContainer(rect);
-  const allValues = row.map(({normalizedValue}) => normalizedValue);
-  const areaWidth = _.sum(allValues) / height;
-  const areaHeight = _.sum(allValues) / width;
-  interface IAccumulator{
-    subXOffset: number,
-    subYOffset: number,
-    coordinates: ILayoutRect<Custom>[]
+  const rowLength = row.length;
+  let valueSum = 0;
+  for (let i = 0; i < rowLength; i += 1) {
+    valueSum += row[i].normalizedValue;
   }
-  const initialValue: IAccumulator = {subXOffset: xOffset, subYOffset: yOffset, coordinates: []}
+
+  const areaWidth = valueSum / height;
+  const areaHeight = valueSum / width;
+
+  let subXOffset = xOffset;
+  let subYOffset = yOffset;
+  let coordinates: ILayoutRect<Custom>[] = [];
   if (width >= height) {
-    const {coordinates} = row.reduce<IAccumulator>(({subXOffset, subYOffset, coordinates}: IAccumulator, num: INormalizedDatum<Custom>) => {
+    for (let i = 0; i < rowLength; i += 1) {
+      const num = row[i];
       const y1 = subYOffset + num.normalizedValue / areaWidth;
       const rect: IRect = {
         x0: subXOffset,
@@ -130,16 +172,14 @@ export const getCoordinates = <Custom>(row: INormalizedDatum<Custom>[], rect: IR
         y1,
       }
       const nextCoordinate: ILayoutRect<Custom> = Object.assign({}, num, rect)
-      return {
-        subXOffset,
-        subYOffset: y1,
-        coordinates: [...coordinates, nextCoordinate],
-      }
-    }, initialValue)
+      subYOffset = y1;
+      coordinates.push(nextCoordinate);
+    }
+
     return coordinates;
   } else {
-
-    const {coordinates} = row.reduce<IAccumulator>(({subXOffset, subYOffset, coordinates}: IAccumulator, num: INormalizedDatum<Custom>) => {
+    for (let i = 0; i < rowLength; i += 1) {
+      const num = row[i];
       const x1 = subXOffset + num.normalizedValue  / areaHeight;
       const rect: IRect = {
         x0: subXOffset,
@@ -148,12 +188,9 @@ export const getCoordinates = <Custom>(row: INormalizedDatum<Custom>[], rect: IR
         y1: subYOffset + areaHeight,
       }
       const nextCoordinate: ILayoutRect<Custom> = Object.assign({}, num, rect)
-      return {
-        subXOffset: x1,
-        subYOffset,
-        coordinates: [...coordinates, nextCoordinate],
-      }
-    }, initialValue)
+      subXOffset = x1;
+      coordinates.push(nextCoordinate);
+    }
     return coordinates;
   }
 }
@@ -189,25 +226,33 @@ export const squarify = <Custom>(
   rect: IRect,
   stack: ILayoutRect<Custom>[]): ILayoutRect<Custom>[] => {
 
-  if (data.length === 0) {
-    const newCoordinates = getCoordinates(currentRow, rect)
-    const newStack = [...stack, ...newCoordinates];
+  const dataLength = data.length;
+  if (dataLength === 0) {
+    const newCoordinates = getCoordinates(currentRow, rect);
+    const newStack: ILayoutRect<Custom>[] = stack.concat(newCoordinates);
     return newStack;
   }
 
   const width = getShortestEdge(rect);
-  const [nextDatum, ...restData] = data;
+  const nextDatum = data[0];
+  const restData = data.slice(1, dataLength);
 
   if (doesAddingToRowImproveAspectRatio(currentRow, nextDatum, width)) {
-    const newRow = [...currentRow, nextDatum];
+    const newRow = currentRow.concat(nextDatum);
     return squarify(
       restData, newRow, rect, stack,
     )
   } else {
-    const allValues = currentRow.map(({normalizedValue}) => normalizedValue);
-    const newContainer = cutArea(rect, _.sum(allValues));
+    const currentRowLength = currentRow.length;
+    let valueSum = 0;
+    for (let i = 0; i < currentRowLength; i += 1) {
+      valueSum += currentRow[i].normalizedValue;
+    }
+
+
+    const newContainer = cutArea(rect, valueSum);
     const newCoordinates = getCoordinates(currentRow, rect);
-    const newStack = [...stack, ...newCoordinates];
+    const newStack = stack.concat(newCoordinates);
 
     return squarify(
       data, [], newContainer, newStack
@@ -217,11 +262,18 @@ export const squarify = <Custom>(
 
 const flatten = <T>(listOfLists: T[][]): T[] => {
   const result: T[] = [];
-  listOfLists.forEach(list => list.forEach(elem => result.push(elem)));
+  const listOfListsLength = listOfLists.length;
+  for (let i = 0; i < listOfListsLength; i += 1) {
+    const innerList = listOfLists[i];
+    const innerListLength = innerList.length;
+    for (let j = 0; j < innerListLength; j += 1) {
+      result.push(innerList[j]);
+    }
+  }
   return result;
 }
 
-const getArea = ({x0, y0, x1, y1}: IRect) => (x1 - x0) * (y1 - y0);
+const getArea = (rect: IRect) => (rect.x1 - rect.x0) * (rect.y1 - rect.y0);
 
 export const recurse = <Custom>(datum: ILayoutRect<Custom>): ILayoutRect<Custom>[] => {
   if (datum.children === undefined) {
@@ -230,7 +282,13 @@ export const recurse = <Custom>(datum: ILayoutRect<Custom>): ILayoutRect<Custom>
   } else {
     const normalizedChildren: INormalizedDatum<Custom>[] = normalizeData<Custom>(datum.children, getArea(datum));
     const squarified: ILayoutRect<Custom>[] = squarify(normalizedChildren, [], datum, []);
-    const contained: ILayoutRect<Custom>[][] = squarified.map(elem => recurse(elem))
+
+    const squarifiedLength = squarified.length;
+    const contained: ILayoutRect<Custom>[][] = [];
+    for (let i = 0; i < squarifiedLength; i += 1) {
+      contained.push(recurse(squarified[i]))
+    }
+
     const flattened: ILayoutRect<Custom>[] = flatten<ILayoutRect<Custom>>(contained);
     return flattened;
   }
