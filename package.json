@@ -31,7 +31,6 @@
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
-    "@types/lodash": "4.14.65",
     "babel-core": "6.24.1",
     "babel-preset-env": "1.5.1",
     "commitizen": "2.9.6",
@@ -44,9 +43,7 @@
     "uglify-js": "3.0.15",
     "validate-commit-msg": "2.12.1"
   },
-  "dependencies": {
-    "lodash": "4.17.4"
-  },
+  "dependencies": {},
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-customizable"
