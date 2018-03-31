@@ -227,41 +227,49 @@ export const cutArea = (rect: IRect, area: number): IRect => {
 };
 
 export const squarify = <Custom>(
-  data: Array<INormalizedDatum<Custom>>,
-  currentRow: Array<INormalizedDatum<Custom>>,
-  rect: IRect,
-  stack: Array<ILayoutRect<Custom>>): Array<ILayoutRect<Custom>> => {
+    inputData: Array<INormalizedDatum<Custom>>,
+    inputCurrentRow: Array<INormalizedDatum<Custom>>,
+    inputRect: IRect,
+    inputStack: Array<ILayoutRect<Custom>>): Array<ILayoutRect<Custom>> => {
 
-  const dataLength = data.length;
-  if (dataLength === 0) {
-    const newCoordinates = getCoordinates(currentRow, rect);
-    const newStack: Array<ILayoutRect<Custom>> = stack.concat(newCoordinates);
-    return newStack;
-  }
+  let data: Array<INormalizedDatum<Custom>> = inputData,
+  currentRow: Array<INormalizedDatum<Custom>> = inputCurrentRow,
+  rect: IRect = inputRect,
+  stack: Array<ILayoutRect<Custom>> = inputStack;
 
-  const width = getShortestEdge(rect);
-  const nextDatum = data[0];
-  const restData = data.slice(1, dataLength);
-
-  if (doesAddingToRowImproveAspectRatio(currentRow, nextDatum, width)) {
-    const newRow = currentRow.concat(nextDatum);
-    return squarify(
-      restData, newRow, rect, stack,
-    );
-  } else {
-    const currentRowLength = currentRow.length;
-    let valueSum = 0;
-    for (let i = 0; i < currentRowLength; i += 1) {
-      valueSum += currentRow[i].normalizedValue;
+  while (true) {
+    const dataLength = data.length;
+    if (dataLength === 0) {
+      const newCoordinates = getCoordinates(currentRow, rect);
+      const newStack: Array<ILayoutRect<Custom>> = stack.concat(newCoordinates);
+      return newStack;
     }
 
-    const newContainer = cutArea(rect, valueSum);
-    const newCoordinates = getCoordinates(currentRow, rect);
-    const newStack = stack.concat(newCoordinates);
+    const width = getShortestEdge(rect);
+    const nextDatum = data[0];
+    const restData = data.slice(1, dataLength);
 
-    return squarify(
-      data, [], newContainer, newStack,
-    );
+    if (doesAddingToRowImproveAspectRatio(currentRow, nextDatum, width)) {
+      const newRow = currentRow.concat(nextDatum);
+      data = restData;
+      currentRow = newRow;
+      rect = rect;
+      stack = stack;
+    } else {
+      const currentRowLength = currentRow.length;
+      let valueSum = 0;
+      for (let i = 0; i < currentRowLength; i += 1) {
+        valueSum += currentRow[i].normalizedValue;
+      }
+
+      const newContainer = cutArea(rect, valueSum);
+      const newCoordinates = getCoordinates(currentRow, rect);
+      const newStack = stack.concat(newCoordinates);
+      data = data;
+      currentRow = [];
+      rect = newContainer;
+      stack = newStack;
+    }
   }
 };
 
