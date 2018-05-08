@@ -24,9 +24,10 @@
     "url": "git+https://github.com/huy-nguyen/squarify.git"
   },
   "scripts": {
-    "start": "nps",
     "test": "jest --coverage --verbose",
-    "commitmsg": "nps commitmsg",
+    "test:ci": "jest --ci --runInBand --coverage --verbose --testResultsProcessor=\"jest-junit\"",
+    "commitmsg": "validate-commit-msg",
+    "commit": "git-cz",
     "clean:lib": "rimraf lib",
     "clean:es": "rimraf es",
     "clean:dist": "rimraf dist",
@@ -38,7 +39,9 @@
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix"
+    "eslint:fix": "eslint . --fix",
+    "lint": "npm run eslint && npm run tslint",
+    "validate": "npm run test && npm run lint && npm run build"
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
