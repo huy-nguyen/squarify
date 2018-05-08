@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore dependency cache
+          key: dependency-cache-v1-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn
+      - save_cache:
+          name: Save depedency cache
+          key: dependency-cache-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Run unit tests
+          command: npm run test:ci
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
+      - run:
+          name: Run linters
+          command: npm run lint
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
+      - save_cache:
+          name: Save build output cache
+          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - dist
+            - lib
+            - es
+
+workflows:
+  version: 2
+  build_publish:
+    jobs:
+      - build
