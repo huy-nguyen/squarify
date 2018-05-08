@@ -1,7 +1,5 @@
 node_modules
 coverage
-index.d.ts
 dist
 lib
 es
-.rpt2_cache
