@@ -57,6 +57,7 @@
     "eslint-plugin-react": "7.7.0",
     "husky": "0.13.4",
     "jest": "20.0.4",
+    "jest-junit": "3.7.0",
     "rollup": "0.58.2",
     "rollup-plugin-typescript2": "0.13.0",
     "rollup-plugin-uglify": "3.0.0",
