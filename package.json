@@ -1,6 +1,6 @@
 {
   "name": "squarify",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "TypeScript/JavaScript implementation of Bruls et al.'s squarified treemap algorithm",
   "keywords": [
     "squarify",
@@ -42,7 +42,8 @@
     "eslint:fix": "eslint . --fix",
     "lint": "npm run eslint && npm run tslint",
     "validate": "npm run test && npm run lint && npm run build",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "publish": "semantic-release"
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
@@ -63,6 +64,7 @@
     "rollup": "0.58.2",
     "rollup-plugin-typescript2": "0.13.0",
     "rollup-plugin-uglify": "3.0.0",
+    "semantic-release": "15.4.0",
     "ts-jest": "20.0.5",
     "tslib": "1.7.1",
     "tslint": "5.10.0",
