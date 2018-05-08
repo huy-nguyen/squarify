@@ -7,6 +7,10 @@ import entry, {
   squarify,
   recurse,
 } from '../index';
+import seedRandom from 'seedrandom';
+import {
+  randomLogNormal,
+} from 'd3-random';
 
 // Create an on-the-fly custom matcher for floating point comparison.
 // Can be used anywhere in place of a number. Second argument is optional.
@@ -232,4 +236,19 @@ test('Package entry point', () => {
     {x0: 5.4, y0: approx(2.33), x1: approx(6), y1: approx(4), value: 2, normalizedValue: 1, id: 7},
   ];
   expect(actual).toEqual(expected);
+});
+
+test('Should not cause stack overflow for large input', () => {
+  const randomNumberGenerator = randomLogNormal.source(seedRandom('abc'))();
+  const size = 10000;
+  const data  = [];
+  for (let i = 0; i < size; i += 1) {
+    const datum = {
+      value: Math.ceil(randomNumberGenerator() * 10000),
+    };
+    data.push(datum);
+  }
+
+
+  expect(() => entry(data, {x0: 0, y0: 0, x1: 1000, y1: 1000})).not.toThrow();
 });
