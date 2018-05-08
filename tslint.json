@@ -1,0 +1,3 @@
+{
+  "extends": ["@cid-harvard/tslint-config"]
+}
