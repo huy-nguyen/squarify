@@ -25,9 +25,16 @@
   },
   "scripts": {
     "start": "nps",
-    "build": "nps build",
     "test": "nps test",
-    "commitmsg": "nps commitmsg"
+    "commitmsg": "nps commitmsg",
+    "clean:lib": "rimraf lib",
+    "clean:es": "rimraf es",
+    "clean:dist": "rimraf dist",
+    "clean": "npm run clean:lib && npm run clean:es && npm run clean:dist",
+    "build:lib": "npm run clean:lib && rollup -c -o lib/index.js -f cjs --environment declaration",
+    "build:es": "npm run clean:es && rollup -c -o es/index.js -f es",
+    "build:dist": "npm run clean:dist && rollup -c -o dist/index.js -f umd --name squarify --environment minify",
+    "build": "npm run build:lib && npm run build:dist && npm run build:es"
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
@@ -37,6 +44,9 @@
     "cz-conventional-changelog-customizable": "1.0.1",
     "husky": "0.13.4",
     "jest": "20.0.4",
+    "rollup": "0.58.2",
+    "rollup-plugin-typescript2": "0.13.0",
+    "rollup-plugin-uglify": "3.0.0",
     "ts-jest": "20.0.5",
     "tslib": "1.7.1",
     "typescript": "2.3.4",
