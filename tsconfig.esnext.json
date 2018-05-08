@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.main",
-  "compilerOptions": {
-    "module": "ES2015",
-    "target": "ESNext",
-    "outDir": "./es",
-    "declaration": false
-  }
-}

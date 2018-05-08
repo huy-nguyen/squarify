@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.main",
-  "compilerOptions": {
-    "module": "umd",
-    "outDir": "./dist",
-    "declaration": false
-  }
-}
