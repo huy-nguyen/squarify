@@ -9,7 +9,7 @@ As a strong believer in composable software, I deliberately made this package mi
 
 [![npm](https://img.shields.io/npm/v/squarify.svg?style=flat-square)](https://www.npmjs.com/package/squarify)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-[![codecov](https://codecov.io/gh/huy-nguyen/squarify/branch/master/graph/badge.svg)]
+[![codecov](https://codecov.io/gh/huy-nguyen/squarify/branch/master/graph/badge.svg)](https://codecov.io/gh/huy-nguyen/squarify)
 
 ## Installation
 
