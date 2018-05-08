@@ -41,7 +41,8 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint": "npm run eslint && npm run tslint",
-    "validate": "npm run test && npm run lint && npm run build"
+    "validate": "npm run test && npm run lint && npm run build",
+    "codecov": "codecov"
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
@@ -50,6 +51,7 @@
     "babel-core": "6.24.1",
     "babel-eslint": "8.2.3",
     "babel-preset-env": "1.5.1",
+    "codecov": "3.0.1",
     "commitizen": "2.9.6",
     "cz-conventional-changelog-customizable": "1.0.1",
     "eslint": "4.19.1",

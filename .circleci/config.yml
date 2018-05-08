@@ -27,6 +27,9 @@ jobs:
       - run:
           name: Run linters
           command: npm run lint
+      - run:
+          name: Upload coverage to codecov
+          command: npm run codecov
       - store_test_results:
           path: reports/junit
       - store_artifacts:
