@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "nps",
-    "test": "nps test",
+    "test": "jest --coverage --verbose",
     "commitmsg": "nps commitmsg",
     "clean:lib": "rimraf lib",
     "clean:es": "rimraf es",

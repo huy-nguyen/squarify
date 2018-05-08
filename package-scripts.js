@@ -16,7 +16,7 @@ module.exports = {
       minify: 'rm -rf dist/index.min.js dist/index.min.js.map',
     },
     minify: {
-      script: 'nps clean.minify && uglifyjs dist/index.js -o dist/index.min.js'
+      script: 'nps clean.minify && uglifyjs dist/index.js -o dist/index.min.js',
     },
     build: {
       script: 'nps build.main && nps build.dist && nps build.esnext',
@@ -40,6 +40,6 @@ module.exports = {
     },
     validate: {
       script: 'nps test && nps build',
-    }
+    },
   },
-}
+};
