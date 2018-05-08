@@ -2,7 +2,7 @@ import typescript from 'rollup-plugin-typescript2';
 import uglify from 'rollup-plugin-uglify';
 
 const shouldCompileDeclaration = !!process.env.declaration;
-const shouldMinify = !!process.env.minify
+const shouldMinify = !!process.env.minify;
 
 let plugins = [
   typescript({
