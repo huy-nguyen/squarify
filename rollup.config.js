@@ -1,6 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import uglify from 'rollup-plugin-uglify';
-
+import {terser} from 'rollup-plugin-terser';
 const shouldCompileDeclaration = !!process.env.declaration;
 const shouldMinify = !!process.env.minify;
 
@@ -16,7 +15,7 @@ let plugins = [
 ];
 
 if (shouldMinify) {
-  plugins = [...plugins, uglify()];
+  plugins = [...plugins, terser()];
 }
 
 export default {
