@@ -72,7 +72,7 @@
     "tslib": "1.9.2",
     "tslint": "5.10.0",
     "typescript": "2.9.1",
-    "uglify-js": "3.4.0",
+    "uglify-js": "3.4.1",
     "validate-commit-msg": "2.14.0"
   },
   "dependencies": {},
