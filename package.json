@@ -63,7 +63,7 @@
     "husky": "0.14.3",
     "jest": "23.1.0",
     "jest-junit": "5.0.0",
-    "rollup": "0.60.4",
+    "rollup": "0.60.5",
     "rollup-plugin-terser": "1.0.1",
     "rollup-plugin-typescript2": "0.15.0",
     "seedrandom": "2.4.3",
