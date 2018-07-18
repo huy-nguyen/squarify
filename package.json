@@ -65,7 +65,7 @@
     "jest-junit": "5.0.0",
     "rollup": "0.61.2",
     "rollup-plugin-terser": "1.0.1",
-    "rollup-plugin-typescript2": "0.15.1",
+    "rollup-plugin-typescript2": "0.16.0",
     "seedrandom": "2.4.3",
     "semantic-release": "15.5.3",
     "ts-jest": "23.0.0",
