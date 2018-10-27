@@ -7,13 +7,13 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore dependency cache
-          key: dependency-cache-v1-{{ checksum "yarn.lock" }}
+          key: dependency-cache-v2-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
           command: yarn
       - save_cache:
           name: Save depedency cache
-          key: dependency-cache-v1-{{ checksum "yarn.lock" }}
+          key: dependency-cache-v2-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run:
@@ -36,7 +36,7 @@ jobs:
           path: reports/junit
       - save_cache:
           name: Save build output cache
-          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
+          key: build-output-v2-{{ .Branch }}-{{ .Revision }}
           paths:
             - dist
             - lib
@@ -49,11 +49,11 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore build results cache
-          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
+          key: build-output-v2-{{ .Branch }}-{{ .Revision }}
       - restore_cache:
           name: Restore dependency cache
           keys:
-            - dependency-cache-v1-{{ checksum "yarn.lock" }}
+            - dependency-cache-v2-{{ checksum "yarn.lock" }}
       - run:
           name: Prepare NPM auth token
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
