@@ -5918,10 +5918,10 @@ rollup-pluginutils@^2.0.1:
     micromatch "^3.1.10"
     tosource "^1.0.0"
 
-rollup@0.61.2:
-  version "0.61.2"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.61.2.tgz#30a953736964683a5b8ea952b137a393d84e6302"
-  integrity sha512-NN7GaX3c9I3oz+CjEex7+JbnSxrLMTBXNRThI4qdN2Tq0K/7RiedlEzOHyuVAHPZKvQeoPiRioTWL3xhmN+oCg==
+rollup@0.63.0:
+  version "0.63.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.63.0.tgz#dfa8dc55df9a6660aff75a21547c63e5c7b9b9d5"
+  integrity sha512-kOoZOu5cuPJzQ4qcRMtjRHFynJus4q+m2XuZNazGAuLOs1Phm9ZW7Jm0XWOUWM5oAGDwYIQp8pSpDYCRLNauyA==
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -6665,10 +6665,10 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
-ts-jest@23.0.0:
-  version "23.0.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.0.0.tgz#3216310fb51e40789c6e4aa20bfe80198d250e9b"
-  integrity sha512-drIjGaoIfXgNi0UUxu963M57kgf+NE2xw386UmD/Ai2hmVpKPCcF2xRwnNMobnVfLQw4v6HSblTKuBg6v+pEBQ==
+ts-jest@23.0.1:
+  version "23.0.1"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.0.1.tgz#c90e747b2787d3394319cde77c2748a87aaf2f48"
+  integrity sha512-/15EsKK96epGlETwSbXNFvl94HqapcJzCteE6qCAExEcS9DfxVTbovJANTpwNQye/xn2fDMT7KiHJwdyvB8eKA==
   dependencies:
     babel-plugin-istanbul "^4.1.6"
     babel-preset-jest "^23.0.0"
