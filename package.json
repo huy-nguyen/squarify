@@ -67,7 +67,7 @@
     "rollup-plugin-terser": "2.0.0",
     "rollup-plugin-typescript2": "0.17.2",
     "seedrandom": "2.4.4",
-    "semantic-release": "15.10.5",
+    "semantic-release": "15.10.7",
     "ts-jest": "23.0.1",
     "tslib": "1.9.3",
     "tslint": "5.10.0",
