@@ -68,7 +68,7 @@
     "rollup-plugin-typescript2": "0.17.2",
     "seedrandom": "2.4.4",
     "semantic-release": "15.10.5",
-    "ts-jest": "23.0.1",
+    "ts-jest": "23.10.5",
     "tslib": "1.9.3",
     "tslint": "5.10.0",
     "typescript": "2.9.1",
