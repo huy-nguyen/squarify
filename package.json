@@ -26,7 +26,6 @@
   "scripts": {
     "test": "jest --coverage --verbose",
     "test:ci": "jest --ci --runInBand --coverage --verbose --testResultsProcessor=\"jest-junit\"",
-    "commitmsg": "validate-commit-msg",
     "commit": "git-cz",
     "clean:lib": "rimraf lib",
     "clean:es": "rimraf es",
@@ -79,6 +78,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-customizable"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg"
     }
   }
 }
