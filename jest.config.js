@@ -1,6 +1,6 @@
 module.exports = {
   transform: {
-    '^.+\\.tsx?$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
+    '^.+\\.tsx?$': 'babel-jest',
     '^.+\\.jsx?$': 'babel-jest',
   },
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
@@ -17,11 +17,4 @@ module.exports = {
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es)',
   ],
-  globals: {
-    '__TS_CONFIG__': {
-      'module': 'commonjs',
-      'jsx': 'react',
-    },
-  },
-  mapCoverage: true,
 };
