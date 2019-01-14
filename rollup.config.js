@@ -1,16 +1,14 @@
-import typescript from 'rollup-plugin-typescript2';
 import {terser} from 'rollup-plugin-terser';
-const shouldCompileDeclaration = !!process.env.declaration;
+import babel from 'rollup-plugin-babel';
+import resolve from 'rollup-plugin-node-resolve';
+
 const shouldMinify = !!process.env.minify;
 
 let plugins = [
-  typescript({
-    tsconfigOverride: {
-      compilerOptions: {
-        declaration: shouldCompileDeclaration,
-      },
-    },
-    check: true,
+  resolve(),
+  babel({
+    exclude: 'node_modules/**',
+    extensions: ['.ts'],
   }),
 ];
 
