@@ -68,7 +68,7 @@
     "jest": "23.6.0",
     "jest-junit": "6.0.1",
     "rollup": "1.1.0",
-    "rollup-plugin-babel": "4.3.0",
+    "rollup-plugin-babel": "4.3.1",
     "rollup-plugin-node-resolve": "4.0.0",
     "rollup-plugin-terser": "4.0.2",
     "seedrandom": "2.4.4",
