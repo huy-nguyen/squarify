@@ -1,8 +1,8 @@
 # Squarify
 This package is a TypeScript implementation (with no external runtime dependencies) of [Bruls _et al._'s squarified treemap algorithm](https://graphics.ethz.ch/teaching/scivis_common/Literature/squarifiedTreeMaps.pdf).
-This is a "battle-tested" implementation and is currently used to calculate the layout of the trade tree map in the [Atlas of Economic Complexity](http://atlas.cid.harvard.edu/explore/), a data visualizsation tool used by 30,000 unique users per month.
+This is a "battle-tested" implementation and is currently used to calculate the layout of the trade tree map in the [Atlas of Economic Complexity](http://atlas.cid.harvard.edu/explore/), a data visualizsation tool used by 15,000 unique visitors per month.
 
-Unlike other JavaScript implementations, it is written in clear, readable code and backed up by unit tests (99.2% coverage).
+Unlike other JavaScript implementations, it is written in clear, readable code and backed up by unit tests ([98% coverage](https://codecov.io/gh/huy-nguyen/squarify)).
 
 As a strong believer in composable software, I deliberately made this package minimal. It only performs the layout step. You are free to use the output to render whichever way you want.
 
@@ -20,7 +20,7 @@ As a strong believer in composable software, I deliberately made this package mi
 ### Input
 The default `export` of this package is a function that expects two parameters:
 - An array of input `data`. It's a recursive data structure where each element has this shape:
-```ts
+```typescript
 type Input<Custom> = {
     value: number;
     children?: Input<Custom>[];
@@ -32,7 +32,7 @@ where `Custom` describes the type of any extra data the user wants to attach to 
   - Your data also shouldn't contain the property `normalizedValue` because it is used internally by the package.
 
 Sample input data (note that the `name` and `color` fields in the input data, which are user-defined and optional, will be passed through to the result):
-```js
+```javascript
 [{
   name: 'Azura', value: 6, color: 'red',
 }, {
@@ -57,7 +57,7 @@ Sample input data (note that the `name` and `color` fields in the input data, wh
 }]
 ```
 - A rectangle that this algorithm will try to fit the tree map into. It should be specified as an object with this shape:
-```ts
+```typescript
 interface Container {
     x0: number;
     y0: number;
@@ -72,7 +72,7 @@ where (`x0`, `y0`) and (`x1`, `y1`) are the coordinates of the top-left and bott
 
 ### Output
 The output is an array of layout rectangles. Each rectangle has this shape:
-```ts
+```typescript
 interface Result {
   x0: number;
   y0: number;
@@ -89,7 +89,7 @@ where
   - Any extra properties in the input are passed through to this rectangle. Also note that the algorithm also flatten the output such that only leaves in the original data will appear in the output.
 
 Sample output for the above sample input:
-```js
+```javascript
 [
   {x0: 0, y0: 0, x1: 41.66, y1: 35, name: 'Noam', value: 3, color: 'orange'},
   {x0: 0, y0: 35, x1: 41.66, y1: 50, name: 'Enos', value: 2, color: 'yellow'},
@@ -102,7 +102,7 @@ Sample output for the above sample input:
 
 ### Sample input
 This is sample usage in a TypeScript file:
-```ts
+```typescript
 import squarify, {
   Input
 } from 'squarify'
@@ -140,7 +140,7 @@ const output = squarify<Custom>(data, container);
 ```
 
 This is a sample in JavaScript:
-```js
+```javascript
 import squarify from 'squarify'
 // Or `const squarify = require('squarify')` in NodeJS.
 
