@@ -1,5 +1,7 @@
 # Squarify
-This package is a TypeScript implementation (with no external runtime dependencies) of [Bruls _et al._'s squarified treemap algorithm](https://graphics.ethz.ch/teaching/scivis_common/Literature/squarifiedTreeMaps.pdf).
+This package is a TypeScript implementation (with no external runtime dependencies) of [Bruls _et al._'s squarified tree map algorithm](https://graphics.ethz.ch/teaching/scivis_common/Literature/squarifiedTreeMaps.pdf).
+If you're interested in how the algorithm works, I explain it in details in an [article on my blog](https://www.huy.dev/squarified-tree-map-reasonml-part-1-2019-03/).
+
 This is a "battle-tested" implementation and is currently used to calculate the layout of the trade tree map in the [Atlas of Economic Complexity](http://atlas.cid.harvard.edu/explore/), a data visualizsation tool used by 15,000 unique visitors per month.
 
 Unlike other JavaScript implementations, it is written in clear, readable code and backed up by unit tests ([98% coverage](https://codecov.io/gh/huy-nguyen/squarify)).
