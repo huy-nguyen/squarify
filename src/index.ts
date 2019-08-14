@@ -12,13 +12,11 @@ export default function<Custom>(
   data: Array<Input<Custom>>,
   container: {x0: number, y0: number, x1: number, y1: number}) {
 
-  const x0 = container.x0;
-  const y0 = container.y0;
-  const x1 = container.x1;
-  const y1 = container.y1;
-
   const input = {
-    x0, y0, x1, y1,
+    x0: container.x0, 
+    y0: container.y0, 
+    x1: container.x1, 
+    y1: container.y1,
     children: data,
   } as ILayoutRect<Custom>;
   return recurse(input);
@@ -175,7 +173,7 @@ export const getCoordinates = <Custom>(
         x0: subXOffset,
         y0: subYOffset,
         x1: subXOffset + areaWidth,
-        y1,
+        y1: y1
       };
       const nextCoordinate: ILayoutRect<Custom> = Object.assign({}, num, rectangle);
       subYOffset = y1;
@@ -190,7 +188,7 @@ export const getCoordinates = <Custom>(
       const rectangle: IRect = {
         x0: subXOffset,
         y0: subYOffset,
-        x1,
+        x1: x1,
         y1: subYOffset + areaHeight,
       };
       const nextCoordinate: ILayoutRect<Custom> = Object.assign({}, num, rectangle);
@@ -208,18 +206,18 @@ export const cutArea = (rect: IRect, area: number): IRect => {
     const newWidth = width - areaWidth;
     const container: IContainer = {
       xOffset: xOffset + areaWidth,
-      yOffset,
+      yOffset: yOffset,
       width: newWidth,
-      height,
+      height: height,
     };
     return containerToRect(container);
   } else {
     const areaHeight = area / width;
     const newHeight = height - areaHeight;
     const container: IContainer = {
-      xOffset,
+      xOffset: xOffset,
       yOffset: yOffset + areaHeight,
-      width,
+      width: width,
       height: newHeight,
     };
     return containerToRect(container);
