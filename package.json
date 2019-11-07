@@ -74,7 +74,7 @@
     "seedrandom": "3.0.5",
     "semantic-release": "15.13.30",
     "tslib": "1.10.0",
-    "tslint": "5.10.0",
+    "tslint": "5.20.1",
     "typescript": "3.7.2",
     "validate-commit-msg": "2.14.0"
   },
