@@ -16,7 +16,7 @@ import {
 // Can be used anywhere in place of a number. Second argument is optional.
 // Usage: `expect(2.001).toEqual(approx(2, 2))`
 // https://jasmine.github.io/edge/introduction#section-Custom_asymmetric_equality_tester
-export const approx = (expected, precision = 2) => ({
+const approx = (expected, precision = 2) => ({
   asymmetricMatch: actual => Math.abs(expected - actual) < Math.pow(10, -precision) / 2,
 });
 
