@@ -1,0 +1,9 @@
+version: 1
+update_configs:
+  - package_manager: "javascript"
+    directory: "/"
+    update_schedule: "monthly"
+    commit_message:
+      prefix: "build"
+      prefix_development: "chore"
+
