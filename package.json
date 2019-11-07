@@ -57,7 +57,7 @@
     "babel-eslint": "10.0.3",
     "babel-jest": "23.6.0",
     "babel-preset-env": "1.7.0",
-    "codecov": "3.2.0",
+    "codecov": "3.6.1",
     "commitizen": "4.0.3",
     "cz-conventional-changelog-customizable": "1.0.1",
     "d3-random": "2.0.0",
