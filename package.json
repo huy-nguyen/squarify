@@ -72,6 +72,7 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
     "seedrandom": "3.0.5",
+    "semantic-release": "15.13.30",
     "tslib": "1.10.0",
     "tslint": "5.10.0",
     "typescript": "3.2.2",
