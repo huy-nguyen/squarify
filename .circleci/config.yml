@@ -23,7 +23,7 @@ jobs:
           name: Run unit tests
           command: npm run test:ci
           environment:
-            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
+            JEST_JUNIT_OUTPUT_DIR: reports/junit/
       - run:
           name: Run linters
           command: npm run lint
