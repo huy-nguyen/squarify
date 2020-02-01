@@ -62,7 +62,7 @@
     "cz-conventional-changelog-customizable": "1.0.1",
     "d3-random": "2.0.0",
     "eslint": "6.6.0",
-    "eslint-plugin-jest": "23.0.2",
+    "eslint-plugin-jest": "23.6.0",
     "eslint-plugin-react": "7.16.0",
     "husky": "3.0.9",
     "jest": "23.6.0",
