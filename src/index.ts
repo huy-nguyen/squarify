@@ -10,7 +10,7 @@ export type Input<Custom> = {
 
 export default function<Custom>(
   data: Array<Input<Custom>>,
-  container: {x0: number, y0: number, x1: number, y1: number}) {
+  container: {x0: number, y0: number, x1: number, y1: number}): Array<ILayoutRect<Custom>> {
 
   const x0 = container.x0;
   const y0 = container.y0;
@@ -68,7 +68,7 @@ export const calculateMaxAspectRatio = <Custom>(row: Array<INormalizedDatum<Cust
 
 export const doesAddingToRowImproveAspectRatio = <Custom>(
     currentRow: Array<INormalizedDatum<Custom>>, nextDatum: INormalizedDatum<Custom>, length: number,
-  ) => {
+  ): boolean => {
 
   if (currentRow.length === 0) {
     return true;
@@ -237,6 +237,7 @@ export const squarify = <Custom>(
   rect: IRect = inputRect,
   stack: Array<ILayoutRect<Custom>> = inputStack;
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const dataLength = data.length;
     if (dataLength === 0) {
@@ -253,7 +254,9 @@ export const squarify = <Custom>(
       const newRow = currentRow.concat(nextDatum);
       data = restData;
       currentRow = newRow;
+      // eslint-disable-next-line no-self-assign
       rect = rect;
+      // eslint-disable-next-line no-self-assign
       stack = stack;
     } else {
       const currentRowLength = currentRow.length;
@@ -265,6 +268,7 @@ export const squarify = <Custom>(
       const newContainer = cutArea(rect, valueSum);
       const newCoordinates = getCoordinates(currentRow, rect);
       const newStack = stack.concat(newCoordinates);
+      // eslint-disable-next-line no-self-assign
       data = data;
       currentRow = [];
       rect = newContainer;

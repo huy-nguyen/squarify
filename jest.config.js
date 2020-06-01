@@ -1,3 +1,4 @@
+/* eslint-env node */
 module.exports = {
   transform: {
     '^.+\\.tsx?$': 'babel-jest',
