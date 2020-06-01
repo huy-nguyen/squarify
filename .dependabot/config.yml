@@ -3,6 +3,7 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     update_schedule: "monthly"
+    version_requirement_updates: "increase_versions"
     commit_message:
       prefix: "build"
       prefix_development: "chore"
