@@ -40,9 +40,7 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint": "npm run eslint",
-    "validate": "npm run test && npm run lint && npm run build",
-    "codecov": "codecov",
-    "publish": "semantic-release"
+    "validate": "npm run test && npm run lint && npm run build"
   },
   "types": "./lib/index.d.ts",
   "devDependencies": {
@@ -55,7 +53,6 @@
     "babel-eslint": "10.0.3",
     "babel-jest": "26.0.1",
     "babel-preset-env": "1.7.0",
-    "codecov": "3.6.5",
     "commitizen": "4.0.3",
     "cz-conventional-changelog-customizable": "1.0.1",
     "d3-random": "2.1.0",
@@ -70,7 +67,6 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
     "seedrandom": "3.0.5",
-    "semantic-release": "17.0.8",
     "tslib": "1.10.0",
     "typescript": "3.7.2",
     "validate-commit-msg": "2.14.0"
