@@ -59,7 +59,7 @@
     "eslint": "7.1.0",
     "eslint-plugin-jest": "23.17.1",
     "eslint-plugin-react": "7.16.0",
-    "husky": "3.0.9",
+    "husky": "4.2.5",
     "jest": "26.0.1",
     "jest-junit": "11.0.1",
     "rollup": "1.32.1",
