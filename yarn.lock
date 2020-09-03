@@ -2450,10 +2450,10 @@ cz-conventional-changelog@3.2.0:
   optionalDependencies:
     "@commitlint/load" ">6.1.1"
 
-d3-random@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/d3-random/-/d3-random-2.1.0.tgz#312f348d789a80f8d05eb1e75fa40d30acb25029"
-  integrity sha512-NY3GKeKxlRAXzUNun8Pv36Mciggnf8v+4kCDEoKaAbw4qmpfJ5LvMazdiYNDEiuM4hQSVHnxNeuYdVRJlFw9dg==
+d3-random@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/d3-random/-/d3-random-2.2.2.tgz#5eebd209ef4e45a2b362b019c1fb21c2c98cbb6e"
+  integrity sha512-0D9P8TRj6qDAtHhRQn6EfdOtHMfsUWanl3yb/84C4DqpZ+VsgfI5iTVRNRbELCfNvRfpMr8OrqqUTQ6ANGCijw==
 
 dashdash@^1.12.0:
   version "1.14.1"

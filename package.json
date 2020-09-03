@@ -55,7 +55,7 @@
     "babel-preset-env": "1.7.0",
     "commitizen": "4.2.1",
     "cz-conventional-changelog-customizable": "1.0.1",
-    "d3-random": "2.1.0",
+    "d3-random": "2.2.2",
     "eslint": "7.6.0",
     "eslint-plugin-jest": "23.20.0",
     "eslint-plugin-react": "7.16.0",
