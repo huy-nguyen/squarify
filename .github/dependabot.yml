@@ -5,7 +5,7 @@ updates:
   schedule:
     interval: monthly
     time: "10:00"
-  open-pull-requests-limit: 10
+  open-pull-requests-limit: 0
   versioning-strategy: increase-if-necessary
   ignore:
   - dependency-name: eslint
